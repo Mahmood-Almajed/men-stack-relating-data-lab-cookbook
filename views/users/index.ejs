@@ -1,0 +1,16 @@
+<%- include('../partials/head') %>
+
+   <h1>Community:</h1>
+
+   <% allUsers.forEach(users => { %>
+    <div class="card container" style="width: 18rem;">
+        <ul class="list-group list-group-flush">
+            <a href="/users/<%=users._id%>/cFood">
+          <li class="list-group-item"><%= users.username %></li>
+          </a>
+        </ul>
+      </div>
+   <% }) %>
+
+
+<%- include('../partials/footer') %>

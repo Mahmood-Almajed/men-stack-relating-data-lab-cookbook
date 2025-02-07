@@ -1,0 +1,22 @@
+<%- include('../partials/head') %>
+
+   <h1>My Pantry item:</h1>
+   
+    <a href="/users/<%= user._id %>/foods/<%= itemId._id %>/edit">edit your food</a>
+  
+  
+    <div class="card container" style="width: 18rem;">
+        <ul class="list-group list-group-flush">
+          
+            <li class="list-group-item"><%= itemId.name %></li>
+          
+        </ul>
+        <form action="/users/<%= user._id %>/foods/<%= itemId._id %>?_method=DELETE" method="POST">
+            <button type="submit" class="btn btn-danger">Delete Item</button>
+        </form>
+
+      </div>
+      
+
+
+<%- include('../partials/footer') %>

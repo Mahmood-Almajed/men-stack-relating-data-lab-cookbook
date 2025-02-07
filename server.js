@@ -24,6 +24,7 @@ mongoose.connection.on('connected', () => {
 // MIDDLEWARE
 app.use(express.urlencoded({ extended: false }))
 app.use(express.static(path.join(__dirname, "public")))
+app.use((methodOverride('_method')))
 app.use(session({
     secret: process.env.SESSION_SECRET,
     resave: false,
@@ -44,7 +45,8 @@ app.use(passUserToView)
 const pagesCtrl = require('./controllers/pages')
 const authCtrl = require('./controllers/auth')
 const vipCtrl = require('./controllers/vip')
-
+const foodCtrl=require('./controllers/food');
+const communityCtrl=require('./controllers/users');
 // ROUTE HANDLERS
 app.get('/', pagesCtrl.home)
 app.get('/auth/sign-up', authCtrl.signUp)
@@ -53,6 +55,19 @@ app.get('/auth/sign-in', authCtrl.signInForm)
 app.post('/auth/sign-in', authCtrl.signIn)
 app.get('/auth/sign-out', authCtrl.signOut)
 app.get('/vip-lounge', isSignedIn, vipCtrl.welcome)
+
+
+app.use(isSignedIn);
+//FOOD ROUTES
+app.get('/users/:userId/foods',foodCtrl.index);
+app.get('/users/:userId/foods/new',foodCtrl.newFood);
+app.post('/users/:userId/foods',foodCtrl.createfood);
+app.get('/users/:userId/foods/:itemId',foodCtrl.showPantry);
+app.delete('/users/:userId/foods/:itemId',foodCtrl.deleteFood);
+app.get('/users/:userId/foods/:itemId/edit',foodCtrl.edit);
+app.put('/users/:userId/foods/:itemId',foodCtrl.updateFood);
+app.get('/users',communityCtrl.community);
+app.get('/users/:userId/cFood',communityCtrl.show);
 
 app.listen(port, () => {
     console.log(`The express app is ready on port ${port}`)

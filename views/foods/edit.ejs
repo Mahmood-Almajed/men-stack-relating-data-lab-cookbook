@@ -1,0 +1,11 @@
+<%- include('../partials/head') %>
+
+   <h1>Edit Your CookBook</h1>
+   <div class="container">
+   <form action="/users/<%= user._id %>/foods/<%= itemId._id %>?_method=PUT" method="POST">
+    <label for="pantry">Edit pantry:</label>
+    <input type="text" name="name" id="pantry" value="<%= itemId.name %>">
+<button type="submit" class="btn btn-primary">Apply edit</button>
+   </form>
+</div>
+<%- include('../partials/footer') %>

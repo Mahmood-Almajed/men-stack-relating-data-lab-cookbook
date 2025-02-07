@@ -1,0 +1,15 @@
+<%- include('../partials/head') %>
+
+   <h1>My Pantry items:</h1>
+   <% pantry.forEach(item => { %>
+    <div class="card container" style="width: 18rem;">
+        <ul class="list-group list-group-flush">
+          
+            <a href="/users/<%= user._id %>/foods/<%=item._id %>"><li class="list-group-item"><%= item.name %></li></a>
+          
+        </ul>
+      </div>
+   <% }) %>
+
+
+<%- include('../partials/footer') %>
